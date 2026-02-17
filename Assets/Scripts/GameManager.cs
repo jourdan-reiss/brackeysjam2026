@@ -10,10 +10,16 @@ public enum GameStates
 
 public class GameManager : MonoBehaviour
 {
-    private GameStates currentState;
+    public static event Action<GameStates> OnInitialStateSet; 
+    public static event Action<GameStates> OnStateChanged;
 
+    [SerializeField] private GameEvent startCombatEvent;
+    
+    private GameStates currentState;
+    
     private void Start()
     {
+        startCombatEvent.InjectCallback(TransitionToCombatState);
         StartGameManagerState();
     }
 
@@ -24,6 +30,9 @@ public class GameManager : MonoBehaviour
             return;
 
         currentState = GameStates.Exploration;
+        OnStateChanged?.Invoke(currentState);
+        Debug.Log("Executing Exploration State Behaviour");
+
     }
 
     [Button("Transition To Combat")]
@@ -33,21 +42,22 @@ public class GameManager : MonoBehaviour
             return;
 
         currentState = GameStates.Combat;
+        OnStateChanged?.Invoke(currentState);
+        Debug.Log("Executing Combat State Behaviour");
     }
 
     private void ExecuteExplorationStateBehaviour()
     {
-        Debug.Log("Executing Exploration State Behaviour");
     }
 
     private void ExecuteCombatStateBehaviour()
     {
-        Debug.Log("Executing Combat State Behaviour");
     }
 
     private void StartGameManagerState()
     {
         currentState = GameStates.Exploration;
+        OnInitialStateSet?.Invoke(currentState);
     }
 
     private void Update()

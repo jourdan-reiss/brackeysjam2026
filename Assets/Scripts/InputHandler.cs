@@ -3,50 +3,69 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class InputHandler : MonoBehaviour, InputSystem_Actions.IPlayerActions
+public class InputHandler : MonoBehaviour, InputSystem_Actions.IExplorationActions, InputSystem_Actions.ICombatActions
 {
     private InputSystem_Actions actions;
-    private InputSystem_Actions.PlayerActions player;
+    private InputSystem_Actions.ExplorationActions explorationInput;
+    private InputSystem_Actions.CombatActions combatInput;
 
     [SerializeField] private UnityEvent<InputAction.CallbackContext> OnMovePerformed;
     [SerializeField] private UnityEvent<InputAction.CallbackContext> OnInteractPerformed;
+    [SerializeField] private UnityEvent<InputAction.CallbackContext> OnCombatMenuNavigatePerformed;
+    [SerializeField] private UnityEvent<InputAction.CallbackContext> OnCombatMenuSelectPerformed;
+    [SerializeField] private UnityEvent<InputAction.CallbackContext> OnCombatMenuBackPerformed;
+    
     
     
     private void Awake()
     {
         actions = new InputSystem_Actions();
-        player = actions.Player;
-        player.AddCallbacks(this);
+        explorationInput = actions.Exploration;
+        combatInput = actions.Combat;
+        explorationInput.AddCallbacks(this);
+        combatInput.AddCallbacks(this);
+
+        GameManager.OnInitialStateSet += UpdateCurrentActionMap;
+        GameManager.OnStateChanged += UpdateCurrentActionMap;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-        player.Disable();
+        GameManager.OnInitialStateSet -= UpdateCurrentActionMap;
+        GameManager.OnStateChanged -= UpdateCurrentActionMap;
     }
 
-    private void OnEnable()
+    private void UpdateCurrentActionMap(GameStates state)
     {
-        player.Enable();
+        DisableAllInputs();
+        switch (state)
+        {
+            case GameStates.Exploration:
+                explorationInput.Enable();
+                break;
+            case GameStates.Combat:
+                combatInput.Enable();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(state), state, null);
+        }
     }
 
+    private void DisableAllInputs()
+    {
+        explorationInput.Disable();
+        combatInput.Disable();
+    }
+    
     private void LogInput(InputAction.CallbackContext cxt)
     {
         Debug.Log($"Action: {cxt.action.name}, input: {cxt.control}");
     }
 
+
     public void OnMove(InputAction.CallbackContext context)
     {
         OnMovePerformed?.Invoke(context);
-        LogInput(context);
-    }
-
-    public void OnLook(InputAction.CallbackContext context)
-    {
-        LogInput(context);
-    }
-
-    public void OnAttack(InputAction.CallbackContext context)
-    {
         LogInput(context);
     }
 
@@ -56,28 +75,26 @@ public class InputHandler : MonoBehaviour, InputSystem_Actions.IPlayerActions
         LogInput(context);
     }
 
-    public void OnCrouch(InputAction.CallbackContext context)
+    public void OnOpenMenu(InputAction.CallbackContext context)
     {
         LogInput(context);
     }
 
-    public void OnJump(InputAction.CallbackContext context)
+    public void OnNavigate(InputAction.CallbackContext context)
     {
+        OnCombatMenuNavigatePerformed?.Invoke(context);
         LogInput(context);
     }
 
-    public void OnPrevious(InputAction.CallbackContext context)
+    public void OnBack(InputAction.CallbackContext context)
     {
+        OnCombatMenuBackPerformed?.Invoke(context);
         LogInput(context);
     }
 
-    public void OnNext(InputAction.CallbackContext context)
+    public void OnSelect(InputAction.CallbackContext context)
     {
-        LogInput(context);
-    }
-
-    public void OnSprint(InputAction.CallbackContext context)
-    {
+        OnCombatMenuSelectPerformed?.Invoke(context);
         LogInput(context);
     }
 }

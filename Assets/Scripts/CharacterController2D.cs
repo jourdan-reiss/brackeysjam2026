@@ -4,7 +4,9 @@ using Vector2 = UnityEngine.Vector2;
 
 public class CharacterController2D : MonoBehaviour
 {
+    [SerializeField] private PlayerExplorationStateData explorationStateData;
     private Interactor interactor;
+    
 
     private void Awake()
     {
@@ -17,6 +19,11 @@ public class CharacterController2D : MonoBehaviour
         Move(context.ReadValue<Vector2>());
     }
 
+    public void SetPlayerExplorationState(PlayerStatus status)
+    {
+        explorationStateData.SetPlayerStatus(status);
+    }
+    
     public void PerformInteract()
     {
         Debug.Log("Performing Interaction");
