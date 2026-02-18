@@ -1,0 +1,25 @@
+:root {
+}
+
+.Container {
+    aspect-ratio: auto;
+    width: 100%;
+    height: 100%;
+}
+
+.Background {
+    position: absolute;
+}
+
+.DialogText {
+    -unity-text-generator: standard;
+    -unity-font-definition: url("project://database/Assets/Fonts/Coolvetica%20Rg.otf?fileID=12800000&guid=d2044c180b7a0b14a99983f43e71fc11&type=3#Coolvetica Rg");
+    align-self: auto;
+    align-content: auto;
+    align-items: auto;
+    font-size: 100px;
+}
+
+.HideElement {
+    visibility: hidden;
+}
