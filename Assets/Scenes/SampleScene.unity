@@ -541,6 +541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d33b612d5366ad41bece118fcea08ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  startCombatEvent: {fileID: 11400000, guid: 669f2dae4a74bea4db0282f824e510eb, type: 2}
 --- !u!4 &1282389981
 Transform:
   m_ObjectHideFlags: 0
@@ -615,6 +616,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnCombatMenuNavigatePerformed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCombatMenuSelectPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCombatMenuBackPerformed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1310416148
 Transform:
   m_ObjectHideFlags: 0
@@ -662,6 +672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb07b044d91875b4abb2a1db02fa9e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterController2D
+  explorationStateData: {fileID: 0}
 --- !u!212 &1671471209
 SpriteRenderer:
   serializedVersion: 2
