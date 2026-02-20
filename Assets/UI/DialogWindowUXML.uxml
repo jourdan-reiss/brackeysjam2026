@@ -1,8 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/DialogWindowStyleSheet.uss?fileID=7433441132597879392&amp;guid=dcc17683909040b4f9e188a496594443&amp;type=3#DialogWindowStyleSheet"/>
-    <ui:VisualElement name="DialogContainer" class="Container" style="flex-grow: 1; position: relative;">
-        <ui:VisualElement name="Background" class="Background HideElement" style="flex-grow: 1; top: 878px; left: 782px; background-color: rgb(191, 191, 191); position: absolute; align-items: stretch; align-content: auto; justify-content: flex-start;">
-            <ui:Label text="Label" name="DialogText" class="DialogText" style="position: relative; top: auto; left: auto; height: 146px; width: 476px; bottom: auto; transform-origin: bottom; -unity-text-align: upper-center; flex-wrap: wrap;"/>
+    <ui:VisualElement name="DialogContainer" class="Container" style="flex-grow: 1; position: absolute; top: initial; left: initial;">
+        <ui:VisualElement name="Background" class="Background HideElement" style="flex-grow: 1; background-color: rgb(191, 191, 191); align-items: stretch; align-content: auto; justify-content: flex-start; position: absolute; -unity-text-align: middle-center; top: 766px; left: 503px; width: 924px;">
+            <ui:Label text="Label" name="DialogText" class="DialogText" style="position: relative; transform-origin: bottom; -unity-text-align: upper-center; flex-wrap: wrap; font-size: 50px; -unity-font-definition: resource(&quot;Fonts/Coolvetica Rg Cond&quot;);"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

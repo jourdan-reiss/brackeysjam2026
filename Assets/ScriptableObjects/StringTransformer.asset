@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95033313965b93142a81f34a295648d0, type: 3}
+  m_Name: StringTransformer
+  m_EditorClassIdentifier: Assembly-CSharp::StringTransformer
+  font: {fileID: 11400000, guid: 40372d95268c346429366fee503ed48e, type: 2}
